@@ -45,9 +45,9 @@
     } else if input.class == "binary" and input.body == [per] {
       (is-per: true, body: NULL-before)
     }
-  } else if func in ("text", "equation", "display") {
+  } else if func in ("text", "equation", "display", "symbol") {
     (
-      body: if func == "text" {
+      body: if func in ("text", "symbol") {
         input.text
       } else {
         input.body
@@ -208,7 +208,7 @@
 
 #let unit(unit, options) = {
   let input = unit
-  assert(type(input) in (str, content), message: "Expected string or content input type, got " + type(input) + " instead.")
+  assert(type(input) in (str, content), message: "Expected string or content input type, got " + str(type(input)) + " instead.")
   options = get-options(options)
 
   if type(input) == str {
